@@ -1,0 +1,14 @@
+---
+version: "3"
+
+env:
+  PYTHON_VERSION:
+    sh: python -c 'import sys; print("%s.%s" % sys.version_info[:2])'
+
+tasks:
+  test:unit:
+    cmds:
+      - ansible-test units -v --requirements --python {{.PYTHON_VERSION}}
+  test:integration:
+    cmds:
+      - ansible-test integration -v

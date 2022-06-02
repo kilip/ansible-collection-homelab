@@ -1,0 +1,4 @@
+---
+- ansible.builtin.include_role:
+    name: kilip.homelab.configure
+- ansible.builtin.include_tasks: verify.yml

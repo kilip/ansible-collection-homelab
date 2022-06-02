@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "redhat.ansible",
+    "redhat.vscode-yaml",
+    "signageos.signageos-vscode-sops",
+    "EditorConfig.EditorConfig",
+    "usernamehw.errorlens",
+    "oderwat.indent-rainbow",
+    "Rubymaniac.vscode-direnv"
+  ]
+}

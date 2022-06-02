@@ -1,0 +1,4 @@
+mock
+pytest-mock
+kubernetes
+pytest-testdox

@@ -1,0 +1,8 @@
+---
+- debug: var=hello
+- name: assert vars configured
+  assert:
+    that:
+      - hello is defined
+      - hello == "world"
+      - foo is not defined

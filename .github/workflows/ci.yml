@@ -1,0 +1,51 @@
+name: CI
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+  push:
+  pull_request:
+
+defaults:
+  run:
+    working-directory: ansible_collections/kilip/homelab
+
+jobs:
+  unit:
+    runs-on: "ubuntu-latest"
+    name: "Units (${{matrix.ansible}})"
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible:
+          - stable-2.9
+          - stable-2.10
+          - stable-2.11
+          - stable-2.12
+          - stable-2.13
+          - devel
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          path: ansible_collections/kilip/homelab
+
+      - name: Set up Python ${{ matrix.ansible }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+      # Run the unit tests
+      - name: Run unit tests for all Python versions
+        run: ansible-test units -v --color --docker --coverage
+
+        # ansible-test support producing code coverage date
+      - name: Generate coverage report
+        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+
+      # See the reports at https://codecov.io/gh/ansible_collections/ansible-collections/community.routeros
+      - uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false

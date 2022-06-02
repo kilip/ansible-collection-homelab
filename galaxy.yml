@@ -13,8 +13,10 @@ tags:
   - kubernetes
   - kubernetes-cluster
 dependencies:
-  ansible.posix: 1.0.*
-  community.sops: 1.0.*
+  community.general: ">=5.0.0"
+  community.sops: ">=1.2.1"
+  ansible.posix: ">=1.4.0"
+  kubernetes.core: ">=2.3.1"
 repository: https://github.com/kilip/ansible-collection-homelab
 documentation: https://github.com/kilip/ansible-collection-homelab
 homepage: https://github.com/kilip/ansible-collection-homelab
