@@ -1,0 +1,24 @@
+---
+namespace: kilip
+name: homelab
+version: 1.0.0
+readme: README.md
+authors:
+  - Anthonius Munthi <me@itstoni.com>
+description: This collection will manage your home k8s cluster with gitops, flux
+license:
+  - MIT
+tags:
+  - homelab
+  - kubernetes
+  - kubernetes-cluster
+dependencies:
+  ansible.posix: 1.0.*
+  community.sops: 1.0.*
+repository: https://github.com/kilip/ansible-collection-homelab
+documentation: https://github.com/kilip/ansible-collection-homelab
+homepage: https://github.com/kilip/ansible-collection-homelab
+issues: https://github.com/kilip/ansible-collection-homelab/issues
+build_ignore:
+  - github
+  - tests
