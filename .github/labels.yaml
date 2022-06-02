@@ -1,21 +1,17 @@
 ---
 # Area
-- name: cluster
+- name: role/cluster
   color: "72ccf3"
   description: >-
     Changes made in the testing directory
-- name: config
+- name: role/configure
   color: "72ccf3"
   description: >-
-    Changes made in the debian role directory
-- name: k3s
+    Changes made in the configure role directory
+- name: role/k3s
   color: "72ccf3"
   description: >-
-    Changes made in the debian role directory
-- name: preflight
-  color: "72ccf3"
-  description: >-
-    Changes made in the preflight role directory
+    Changes made in the k3s role directory
 - name: github
   color: "72ccf3"
   description: >-
@@ -23,7 +19,7 @@
 - name: testing
   color: "72ccf3"
   description: >-
-    Changes made in the testing directory
+    Changes made in the tests directory
 # Renovate
 - name: renovate/ansible
   color: "ffc300"

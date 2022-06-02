@@ -1,9 +1,11 @@
 ---
-role/config:
-  - "roles/**/config/**"
+role/configure:
+  - "roles/**/configure/**"
 role/k3s:
   - "roles/**/k3s/**"
 role/cluster:
   - "roles/**/cluster/**"
 github:
   - ".github/**/*"
+testing:
+  - "testing/**/*"
