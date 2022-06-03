@@ -4,8 +4,8 @@ __metaclass__ = type
 
 import os
 from ....unit.compat import unittest
+from ....unit.compat.mock import MagicMock, patch
 from ....unit.mock.loader import DictDataLoader
-from ....unit.mock import MagicMock, patch
 
 from ansible import constants as C
 from ansible.playbook.task import Task
