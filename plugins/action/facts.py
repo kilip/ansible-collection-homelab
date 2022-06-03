@@ -27,12 +27,11 @@ class ActionModule(ActionBase):
 
     def _load_config(self, file):
         if not exists(file):
-            return
+            return 0
 
         sops = Sops()
         content = sops.decrypt(encrypted_file=file, display=display)
         configs = yaml.safe_load(content)
-        #self.facts['homelab_config_content'] = configs
         for key, value in configs.items():
             self.facts[key] = value
 
@@ -66,7 +65,8 @@ class ActionModule(ActionBase):
 
         self._load_config(self.config_file)
         if deploy is not None:
-            self._load_config(self.config_dir + "/homelab."+ deploy + ".sops.yml")
+            deploy_config = self.config_dir + "/homelab." + deploy + ".sops.yml"
+            self._load_config(deploy_config)
 
         self.facts['homelab_project_dir'] = project_dir
         self.facts['homelab_inventory_dir'] = inventory_dir

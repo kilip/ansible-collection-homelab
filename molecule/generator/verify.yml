@@ -7,9 +7,9 @@
   - kilip.homelab.facts:
   - name: Verify configuration
     ansible.builtin.include_role:
-      name: kilip.homelab.configure
+      name: kilip.homelab.generator
       tasks_from: verify/config.yml
   - name: Verify Inventory
     ansible.builtin.include_role:
-      name: kilip.homelab.configure
+      name: kilip.homelab.generator
       tasks_from: "verify/inventory.yml"

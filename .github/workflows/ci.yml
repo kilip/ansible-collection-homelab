@@ -113,24 +113,14 @@ jobs:
 
   integration:
     runs-on: ubuntu-latest
-    name: Integration (${{ matrix.ansible }}+py${{ matrix.python }})
+    name: Molecule (${{ matrix.scenario }}-${{ matrix.dist }})
     strategy:
       fail-fast: false
       matrix:
-        include:
-          # - ansible: stable-2.9
-          #   python: 3.5
-          # - ansible: stable-2.10
-          #   python: 3.5
-          - ansible: stable-2.11
-            python: 3.6
-          - ansible: stable-2.12
-            python: "3.10"
-          - ansible: stable-2.13
-            python: "3.10"
-          - ansible: devel
-            python: "3.10"
-
+        scenario:
+          - generator
+        dist:
+          - ubuntu-22.04
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -140,22 +130,9 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          # it is just required to run that once as "ansible-test integration" in the docker image
-          # will run on all python versions it supports.
           python-version: '3.10'
 
-      - name: Install ansible-core (${{ matrix.ansible }})
-        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
-
-      # Run the integration tests
-      - name: Run integration test
-        run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --docker --coverage
-
-        # ansible-test support producing code coverage date
-      - name: Generate coverage report
-        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
-
-      # See the reports at https://codecov.io/gh/ansible-collections/community.routeros
-      - uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: false
+      - name: Run molecule test
+        run: molecule test -s ${{ matrix.scenario}}
+        env:
+          MOLECULE_DIST: ${{ matrix.dist }}

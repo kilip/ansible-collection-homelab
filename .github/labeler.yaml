@@ -1,6 +1,6 @@
 ---
-role/configure:
-  - "roles/**/configure/**"
+role/generator:
+  - "roles/**/generator/**"
 role/k3s:
   - "roles/**/k3s/**"
 role/cluster:

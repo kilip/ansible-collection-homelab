@@ -4,10 +4,10 @@
   color: "72ccf3"
   description: >-
     Changes made in the testing directory
-- name: role/configure
+- name: role/generator
   color: "72ccf3"
   description: >-
-    Changes made in the configure role directory
+    Changes made in the generator role directory
 - name: role/k3s
   color: "72ccf3"
   description: >-
