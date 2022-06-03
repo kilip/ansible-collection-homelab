@@ -6,9 +6,15 @@ env:
     sh: python -c 'import sys; print("%s.%s" % sys.version_info[:2])'
 
 tasks:
+  test:sanity:
+    desc: sanity test
+    cmds:
+      - ansible-test sanity -v --python {{.PYTHON_VERSION}}
   test:unit:
+    desc: unit test
     cmds:
-      - ansible-test units -v --requirements --python {{.PYTHON_VERSION}}
+      - ansible-test units -v --python {{.PYTHON_VERSION}}
   test:integration:
+    desc: integration test
     cmds:
-      - ansible-test integration -v
+      - ansible-test integration --docker kilip/molecule-ubuntu-20.04 --docker-privileged -v --retry-on-error --continue-on-error --color --python 3.8

@@ -1,0 +1,14 @@
+---
+
+homelab_git_repository: ""
+
+homelab_hosts:
+  - hostname: k8s-0
+    groups: [kubernetes]
+    control_node: true
+  - hostname: k8s-1
+    groups: [kubernetes]
+    control_node: false
+  - hostname: k8s-2
+    groups: [kubernetes]
+    control_node: false

@@ -1,7 +1,8 @@
 {
   "ansible.ansibleLint.enabled": true,
   "files.associations": {
-    "**/roles/**/*.yml": "ansible",
+    "**/playbooks/**/*.yml": "ansible",
+    "**/roles/**/tasks/*.yml": "ansible",
     "**/integration/**/*.yml": "ansible"
   },
 }
