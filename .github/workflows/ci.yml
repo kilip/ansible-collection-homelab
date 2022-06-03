@@ -16,6 +16,10 @@ defaults:
   run:
     working-directory: ansible_collections/kilip/homelab
 
+env:
+  PY_COLORS: 1
+  ANSIBLE_FORCE_COLOR: 1
+
 jobs:
   sanity:
     name: Sanity (${{ matrix.ansible }})
