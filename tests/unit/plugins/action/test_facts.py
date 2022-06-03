@@ -15,6 +15,7 @@ from ansible.executor import module_common
 from ansible_collections.kilip.homelab.plugins.action.facts import ActionModule as FactsAction
 from ansible_collections.kilip.homelab.plugins.action.facts import ENV_PROJECT_DIR
 
+
 class TestFacts(unittest.TestCase):
     task = MagicMock(Task)
     play_context = MagicMock()

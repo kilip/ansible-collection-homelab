@@ -11,6 +11,7 @@ ENV_PROJECT_DIR = 'HOMELAB_PROJECT_DIR'
 ENV_CONFIG_DIR = 'HOMELAB_CONFIG_DIR'
 display = Display()
 
+
 class ActionModule(ActionBase):
 
     def __init__(self, task, connection, play_context, loader, templar, shared_loader_obj):
