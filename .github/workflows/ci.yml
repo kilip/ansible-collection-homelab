@@ -18,8 +18,9 @@ defaults:
 
 jobs:
   sanity:
-    name: Sanity (Ⓐ${{ matrix.ansible }})
+    name: Sanity (${{ matrix.ansible }})
     strategy:
+      fail-fast: false
       matrix:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
@@ -77,8 +78,8 @@ jobs:
       fail-fast: false
       matrix:
         ansible:
-          # - stable-2.9
-          # - stable-2.10
+          - stable-2.9
+          - stable-2.10
           - stable-2.11
           - stable-2.12
           - stable-2.13
@@ -117,11 +118,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - ansible: stable-2.9
-            python: 3.5
-          # 2.10
-          - ansible: stable-2.10
-            python: 3.5
+          # - ansible: stable-2.9
+          #   python: 3.5
+          # - ansible: stable-2.10
+          #   python: 3.5
           - ansible: stable-2.11
             python: 3.6
           - ansible: stable-2.12
