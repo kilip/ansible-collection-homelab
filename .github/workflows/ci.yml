@@ -128,7 +128,8 @@ jobs:
       fail-fast: false
       matrix:
         scenario:
-          - generator
+          - default
+          - deploy-env
         dist:
           - ubuntu-22.04
     steps:

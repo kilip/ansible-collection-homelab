@@ -22,6 +22,7 @@ class ActionModule(ActionBase):
         self.config_dir = ""
         self.project_dir = ""
         self.config_file = ""
+        self.deploy = ""
 
     def _load_config(self, file):
         if not exists(file):
@@ -56,16 +57,20 @@ class ActionModule(ActionBase):
         if os.environ.get(ENV_DEPLOY) is not None:
             inventory_dir = inventory_dir + "/" + os.environ.get(ENV_DEPLOY)
 
-        deploy = os.environ.get(ENV_DEPLOY)
+        if os.environ.get(ENV_DEPLOY) is not None:
+            self.deploy = os.environ.get(ENV_DEPLOY)
+
         self.config_dir = config_dir
         self.project_dir = project_dir
         self.config_file = config_dir + "/homelab.sops.yml"
 
         self._load_config(self.config_file)
-        if deploy is not None:
-            deploy_config = self.config_dir + "/homelab." + deploy + ".sops.yml"
+        if self.deploy != "":
+            deploy_config = self.config_dir + "/homelab." + self.deploy + ".sops.yml"
             self._load_config(deploy_config)
+            inventory_dir = inventory_dir + "/" + self.deploy
 
+        self.facts['homelab_deploy'] = self.deploy
         self.facts['homelab_project_dir'] = project_dir
         self.facts['homelab_inventory_dir'] = inventory_dir
         self.facts['homelab_config_dir'] = config_dir
@@ -83,6 +88,11 @@ class ActionModule(ActionBase):
             task_vars=task_vars,
             tmp=tmp
         )
+        # ansible_facts = module_return['ansible_facts']
+        for key, value in task_vars.items():
+            if key == 'homelab_deploy':
+                self.deploy = value
+
         self._setup_path()
 
         return dict(ansible_facts=self.facts)

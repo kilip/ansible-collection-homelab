@@ -1,0 +1,8 @@
+---
+# This is an example playbook to execute Ansible tests.
+# @todo: Add more assert for this task
+- name: Verify Configuration
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - kilip.homelab.facts:
