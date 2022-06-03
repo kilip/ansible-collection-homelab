@@ -3,5 +3,6 @@ pytest-mock
 kubernetes
 pytest-testdox
 pytest
+ansible
 molecule
 molecule-docker
