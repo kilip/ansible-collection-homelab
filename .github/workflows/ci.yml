@@ -98,6 +98,11 @@ jobs:
       - name: Install ansible-base (${{ matrix.ansible }})
         run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
 
+      - name: Install role and collection dependencies
+        run: |
+          ansible-galaxy install -r requirements.yml
+          ansible-galaxy collection install -r requirements.yml
+
       # Run the unit tests
       - name: Run unit tests for all Python versions
         run: ansible-test units -v --color --docker --coverage
@@ -142,11 +147,6 @@ jobs:
 
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.2.0
-
-      - name: Install age encryption
-        run: |
-          sudo apt update
-          sudo apt install age
 
       - name: Run molecule test
         run: molecule test -s ${{ matrix.scenario}}
