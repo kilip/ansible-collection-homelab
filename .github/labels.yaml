@@ -16,7 +16,7 @@
   color: "72ccf3"
   description: >-
     Changes made in the github directory
-- name: testing
+- name: tests
   color: "72ccf3"
   description: >-
     Changes made in the tests directory
