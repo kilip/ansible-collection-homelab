@@ -1,5 +1,5 @@
 ---
-- name: Bootstrap
+- name: Generator
   hosts: localhost
   vars:
     homelab_age_public_key: "{{ lookup('env', 'SOPS_AGE_PUBLIC_KEY') }}"

@@ -1,0 +1,24 @@
+---
+# This is an example playbook to execute Ansible tests.
+# @todo: Add more assert for this task
+- name: Verify deploy environment genrator
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - kilip.homelab.facts:
+    - name: checking generated files
+      ansible.builtin.include_role:
+        name: kilip.homelab.generator
+        tasks_from: verify/file-existence.yml
+      vars:
+        path_to_check: "{{ item }}"
+      loop:
+        - ansible/inventory/dev/hosts
+        - ansible/inventory/dev/host_vars/k8s-0.sops.yml
+        - ansible/inventory/dev/host_vars/k8s-1.sops.yml
+        - ansible/inventory/dev/host_vars/k8s-2.sops.yml
+        - ansible/inventory/live/hosts
+        - ansible/inventory/live/host_vars/iris.sops.yml
+        - ansible/inventory/live/host_vars/hera.sops.yml
+        - ansible/inventory/live/host_vars/mars.sops.yml
+        - ansible/inventory/live/host_vars/zeus.sops.yml

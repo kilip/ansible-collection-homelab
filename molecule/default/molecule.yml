@@ -4,7 +4,7 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: olympus-configure
+  - name: homelab-default
     image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
     pre_build_image: true
     privileged: true
@@ -14,7 +14,7 @@ platforms:
 provisioner:
   name: ansible
   env:
-    HOMELAB_PROJECT_DIR: "${PWD}/molecule/configure/sandbox"
+    HOMELAB_PROJECT_DIR: "${PWD}/molecule/default/sandbox"
     SOPS_AGE_PUBLIC_KEY: "age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a"
     SOPS_AGE_KEY_FILE: "${PWD}/etc/age.txt"
     SOPS_AGE_KEY: "AGE-SECRET-KEY-1UW0JQ4VA4PXNPDKPFHTJ932E5TVNCFMDNQKTUNCYGNUZ3VFD6E2QMQA3ZT"

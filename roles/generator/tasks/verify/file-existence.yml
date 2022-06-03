@@ -3,6 +3,7 @@
   ansible.builtin.stat:
     path: "{{ homelab_project_dir }}/{{ path_to_check  }}"
   register: fstat
+
 - name: Assert exists "{{ path_to_check }}"
   ansible.builtin.assert:
     that: fstat.stat.exists

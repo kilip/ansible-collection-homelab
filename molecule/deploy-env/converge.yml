@@ -1,0 +1,30 @@
+---
+- name: Generator
+  hosts: localhost
+  vars:
+    homelab_age_public_key: "{{ lookup('env', 'SOPS_AGE_PUBLIC_KEY') }}"
+  tasks:
+    - kilip.homelab.facts:
+    - name: Ensure homelab config dir exists
+      ansible.builtin.file:
+        path: "{{ homelab_config_dir }}"
+        state: directory
+    - name:  Copy homelab config
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "{{ homelab_config_dir }}/{{ item }}"
+      loop:
+        - "homelab.sops.yml"
+        - "homelab.dev.sops.yml"
+        - "homelab.live.sops.yml"
+      changed_when: false
+    - name: Start configuring dev homelab
+      ansible.builtin.include_role:
+        name: "kilip.homelab.generator"
+      vars:
+        homelab_deploy: "dev"
+    - name: Start configuring live homelab
+      ansible.builtin.include_role:
+        name: "kilip.homelab.generator"
+      vars:
+        homelab_deploy: "live"
