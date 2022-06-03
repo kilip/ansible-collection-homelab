@@ -1,4 +1,14 @@
 ---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 600
+
+- name: Install python3-apt
+  ansible.builtin.package:
+    name: python3-apt
+    state: present
+
 - name: install sops release
   ansible.builtin.apt:
     deb: https://github.com/mozilla/sops/releases/download/v{{ sops_version }}/sops_{{ sops_version }}_amd64.deb
