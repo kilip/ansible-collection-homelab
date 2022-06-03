@@ -1,0 +1,20 @@
+---
+- name: Verify file generation
+  ansible.builtin.include_tasks: verify/file-existence.yml
+  vars:
+    path_to_check: "{{ item }}"
+  loop_control:
+    label: "{{ item }}"
+  loop:
+    - .sops.yaml
+    - config/homelab.sops.yml
+    - ansible/inventory/hosts
+    - ansible/inventory/group_vars/kubernetes/k3s.yml
+    - ansible/inventory/group_vars/master/k3s.yml
+    - ansible/inventory/group_vars/worker/k3s.yml
+
+- name: Verify ansible host var files
+  ansible.builtin.include_tasks: verify/file-existence.yml
+  vars:
+    path_to_check: "ansible/inventory/host_vars/{{ item.hostname }}.sops.yml"
+  loop: "{{ homelab_hosts }}"

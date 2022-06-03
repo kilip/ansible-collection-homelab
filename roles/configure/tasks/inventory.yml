@@ -1,0 +1,37 @@
+---
+- name: Ensure inventory dir exists
+  ansible.builtin.file:
+    path: "{{ homelab_inventory_dir }}/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - host_vars
+    - group_vars/kubernetes
+    - group_vars/master
+    - group_vars/worker
+
+- name: Build hosts inventory
+  ansible.builtin.template:
+    src: "inventory/hosts.ini.j2"
+    dest: "{{ homelab_inventory_dir }}/hosts"
+    mode: "0644"
+
+- name: Build host vars
+  ansible.builtin.template:
+    src: "inventory/host-vars.yml.j2"
+    dest: "{{ homelab_inventory_dir }}/host_vars/{{ item.hostname }}.sops.yml"
+    mode: "0644"
+  loop_control:
+    label: "{{ item.hostname }}"
+  vars:
+    host: "{{ item }}"
+  with_items: "{{ homelab_hosts }}"
+
+- name: Build group vars
+  ansible.builtin.copy:
+    src: "kubernetes/{{ item }}.yml"
+    dest: "{{ homelab_inventory_dir }}/group_vars/{{ item }}/k3s.yml"
+  loop:
+    - kubernetes
+    - master
+    - worker

@@ -1,0 +1,32 @@
+{% for host in homelab_hosts %}
+{{ host.hostname }}
+{% endfor %}
+
+{% for group in homelab_groups %}
+{% if group not in ["kubernetes", "master", "worker"] %}
+[{{ group }}]
+{% for host in homelab_hosts %}
+{% if group in host.groups %}
+{{ host.hostname }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+[master]
+{% for host in homelab_hosts %}
+{% if "kubernetes" in host.groups and host.control_node %}
+{{ host.hostname }}
+{% endif %}
+{% endfor %}
+
+[worker]
+{% for host in homelab_hosts %}
+{% if "kubernetes" in host.groups and not host.control_node %}
+{{ host.hostname }}
+{% endif %}
+{% endfor %}
+
+[kubernetes:children]
+master
+worker

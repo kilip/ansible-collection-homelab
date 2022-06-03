@@ -1,5 +1,9 @@
 ---
-
+homelab_temp_dir: "/tmp/homelab"
+sops_version: "3.7.3"
+age_version: "1.0.0"
+age_download_url: |
+  https://github.com/FiloSottile/age/releases/latest/download/age-v{{ age_version }}-linux-amd64.tar.gz
 homelab_required_vars:
   - homelab_project_dir
   - homelab_config_dir

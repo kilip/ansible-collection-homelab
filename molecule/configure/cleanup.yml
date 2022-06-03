@@ -1,0 +1,8 @@
+- hosts: localhost
+  tasks:
+    - name: Load homelab facts
+      kilip.homelab.facts:
+    - name: Ensure sandbox dir not exists
+      ansible.builtin.file:
+        path: "{{ homelab_project_dir }}"
+        state: absent

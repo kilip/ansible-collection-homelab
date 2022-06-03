@@ -2,6 +2,7 @@
 
 homelab_git_repository: ""
 
+# Configures your homelab sops
 homelab_hosts:
   - hostname: k8s-0
     groups: [kubernetes]

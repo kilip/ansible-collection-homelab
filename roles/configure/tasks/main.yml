@@ -2,23 +2,15 @@
 - name: Gather homelab facts
   kilip.homelab.facts:
 
-- name: Ensure config dir exists
-  ansible.builtin.file:
-    state: directory
-    path: "{{ homelab_config_dir }}"
-    mode: "0755"
-
 - name: Gather existing configuration
   ansible.builtin.stat:
-    path: "{{ homelab_config_dir }}/homelab.yml"
+    path: "{{ homelab_config_file }}"
   register: scfg
 
-- name: Copy default config
-  when: not scfg.stat.exists
-  ansible.builtin.copy:
-    src: "homelab.yml"
-    dest: "{{ homelab_config_file }}"
-    mode: "0644"
+- name: Verify homelab configuration
+  ansible.builtin.include_tasks: verify/config.yml
+  when: scfg.stat.exists
 
-- name: Include homelab configuration
-  ansible.builtin.include_vars: "{{ homelab_config_file }}"
+- name: Build inventory files
+  ansible.builtin.include_tasks: inventory.yml
+  when: scfg.stat.exists

@@ -1,0 +1,26 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: olympus-configure
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
+provisioner:
+  name: ansible
+  env:
+    HOMELAB_PROJECT_DIR: "${PWD}/molecule/configure/sandbox"
+    SOPS_AGE_PUBLIC_KEY: "age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a"
+    SOPS_AGE_KEY_FILE: "${PWD}/etc/age.txt"
+    SOPS_AGE_KEY: "AGE-SECRET-KEY-1UW0JQ4VA4PXNPDKPFHTJ932E5TVNCFMDNQKTUNCYGNUZ3VFD6E2QMQA3ZT"
+  config_options:
+    defaults:
+      vars_plugins_enabled: "host_group_vars,community.sops.sops"
+
+verifier:
+  name: ansible

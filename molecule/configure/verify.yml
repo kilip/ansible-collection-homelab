@@ -1,0 +1,15 @@
+---
+# This is an example playbook to execute Ansible tests.
+- name: Verify Configuration
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - kilip.homelab.facts:
+  - name: Verify configuration
+    ansible.builtin.include_role:
+      name: kilip.homelab.configure
+      tasks_from: verify/config.yml
+  - name: Verify Inventory
+    ansible.builtin.include_role:
+      name: kilip.homelab.configure
+      tasks_from: "verify/inventory.yml"
