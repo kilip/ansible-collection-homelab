@@ -5,7 +5,7 @@ __metaclass__ = type
 import os
 from ....unit.compat import unittest
 from ....unit.mock.loader import DictDataLoader
-from unittest.mock import MagicMock, patch
+from ....unit.mock import MagicMock, patch
 
 from ansible import constants as C
 from ansible.playbook.task import Task
