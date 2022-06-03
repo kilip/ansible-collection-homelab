@@ -49,7 +49,7 @@ class TestFacts(unittest.TestCase):
         plugin._get_module_args = get_module_args
         plugin._execute_module = MagicMock
 
-        result = plugin.run(dict())
+        result = plugin.run(dict(), dict())
         facts = result["ansible_facts"]
 
         # self.assertEqual(os.environ[ENV_PROJECT_DIR], "hello")
