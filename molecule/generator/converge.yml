@@ -1,0 +1,19 @@
+---
+- name: Bootstrap
+  hosts: localhost
+  vars:
+    homelab_age_public_key: "{{ lookup('env', 'SOPS_AGE_PUBLIC_KEY') }}"
+  tasks:
+    - kilip.homelab.facts:
+    - name: Include generator role
+      ansible.builtin.include_role:
+        name: "kilip.homelab.generator"
+        tasks_from: bootstrap
+    - name:  Copy homelab config
+      ansible.builtin.copy:
+        src: "homelab.sops.yml"
+        dest: "{{ homelab_config_file }}"
+      changed_when: false
+    - name: Start configuring homelab
+      ansible.builtin.include_role:
+        name: "kilip.homelab.generator"

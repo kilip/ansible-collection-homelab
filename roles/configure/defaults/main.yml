@@ -1,8 +1,0 @@
----
-
-homelab_required_vars:
-  - homelab_project_dir
-  - homelab_config_dir
-  - homelab_config_file
-  - homelab_repository
-  - homelab_hosts

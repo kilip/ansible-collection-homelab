@@ -1,0 +1,16 @@
+---
+- name: Gather homelab facts
+  kilip.homelab.facts:
+
+- name: Gather existing configuration
+  ansible.builtin.stat:
+    path: "{{ homelab_config_file }}"
+  register: scfg
+
+- name: Verify homelab configuration
+  ansible.builtin.include_tasks: verify/config.yml
+  when: scfg.stat.exists
+
+- name: Build inventory files
+  ansible.builtin.include_tasks: inventory.yml
+  when: scfg.stat.exists

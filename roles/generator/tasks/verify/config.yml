@@ -1,0 +1,32 @@
+---
+- name: Ensure vars loaded
+  community.sops.load_vars:
+    file: "{{ homelab_config_file }}"
+
+- name: assert vars defined
+  ansible.builtin.assert:
+    that: "{{ item }} is defined"
+    fail_msg: "{{ item }} is not defined"
+    quiet: true
+  loop_control:
+    label: "{{ item }}"
+  loop:
+    - homelab_project_dir
+    - homelab_config_dir
+    - homelab_git_repository
+    - homelab_hosts
+    - inventory_hostname
+
+- name: assert vars configured
+  ansible.builtin.assert:
+    that: "{{ item }} != ''"
+    fail_msg: "{{ item }} is not configured"
+    quiet: true
+  loop_control:
+    label: "{{ item }}"
+  loop:
+    - homelab_project_dir
+    - homelab_config_dir
+    - homelab_git_repository
+    - homelab_hosts
+    - inventory_hostname

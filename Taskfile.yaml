@@ -1,19 +1,50 @@
 ---
 version: "3"
 
+vars:
+  SCENARIO: '{{default "configure" .SCENARIO}}'
+
 env:
   PYTHON_VERSION:
     sh: python -c 'import sys; print("%s.%s" % sys.version_info[:2])'
 
 tasks:
+
+  converge:
+    desc: Start molecule converge task
+    cmds:
+      - molecule converge -s {{.SCENARIO}}
+
+  verify:
+    desc: Verify molecule build
+    cmds:
+      - molecule verify -s {{.SCENARIO}}
+
+  destroy:
+    desc: Destroy molecule instances
+    cmds:
+      - molecule destroy -s {{.SCENARIO}}
+
+  cleanup:
+    desc: Cleanup molecule instances
+    cmds:
+      - molecule cleanup -s {{.SCENARIO}}
+
+  molecule:test:
+    desc: Runs molecule testing
+    cmds:
+      - molecule test -s {{.SCENARIO}}
+
   test:sanity:
     desc: sanity test
     cmds:
       - ansible-test sanity -v --python {{.PYTHON_VERSION}}
+
   test:unit:
     desc: unit test
     cmds:
       - ansible-test units -v --python {{.PYTHON_VERSION}}
+
   test:integration:
     desc: integration test
     cmds:
