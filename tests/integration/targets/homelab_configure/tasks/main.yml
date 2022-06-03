@@ -1,0 +1,9 @@
+---
+- name: Include configure role
+  ansible.builtin.include_role:
+    name: kilip.homelab.configure
+
+- name: Verify configuration
+  ansible.builtin.include_role:
+    name: kilip.homelab.configure
+    tasks_from: "verify.yml"

@@ -7,5 +7,5 @@ role/cluster:
   - "roles/**/cluster/**"
 github:
   - ".github/**/*"
-testing:
-  - "testing/**/*"
+tests:
+  - "tests/**/*"

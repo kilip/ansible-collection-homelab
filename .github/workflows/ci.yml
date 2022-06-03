@@ -3,13 +3,74 @@ name: CI
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
   push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
+  # Run CI once per day (at 05:15 UTC)
+  schedule:
+    - cron: '15 5 * * *'
 
 defaults:
   run:
     working-directory: ansible_collections/kilip/homelab
 
 jobs:
+  sanity:
+    name: Sanity (${{ matrix.ansible }})
+    strategy:
+      fail-fast: false
+      matrix:
+        ansible:
+          # It's important that Sanity is tested against all stable-X.Y branches
+          # Testing against `devel` may fail as new tests are added.
+          - stable-2.9
+          - stable-2.10
+          - stable-2.11
+          - stable-2.12
+          - stable-2.13
+          - devel
+    runs-on: ubuntu-latest
+    steps:
+
+      # ansible-test requires the collection to be in a directory in the form
+      # .../ansible_collections/community/routeros/
+
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          path: ansible_collections/kilip/homelab
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          # it is just required to run that once as "ansible-test sanity" in the docker image
+          # will run on all python versions it supports.
+          python-version: '3.10'
+
+      # Install the head of the given branch (devel, stable-2.10)
+      - name: Install ansible-base (${{ matrix.ansible }})
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+        # NOTE: we're installing with git to work around Galaxy being a huge PITA (https://github.com/ansible/galaxy/issues/2429)
+        # run: ansible-galaxy collection install ansible.netcommon -p .
+
+      # run ansible-test sanity inside of Docker.
+      # The docker container has all the pinned dependencies that are required
+      # and all python versions ansible supports.
+      - name: Run sanity tests
+        run: ansible-test sanity --docker -v --color --coverage
+
+        # ansible-test support producing code coverage date
+      - name: Generate coverage report
+        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+
+      # See the reports at https://codecov.io/gh/ansible_collections/ansible-collections/community.routeros
+      - uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false
+
   unit:
     runs-on: "ubuntu-latest"
     name: "Units (${{matrix.ansible}})"
@@ -29,7 +90,7 @@ jobs:
         with:
           path: ansible_collections/kilip/homelab
 
-      - name: Set up Python ${{ matrix.ansible }}
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
@@ -46,6 +107,55 @@ jobs:
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
 
       # See the reports at https://codecov.io/gh/ansible_collections/ansible-collections/community.routeros
+      - uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false
+
+  integration:
+    runs-on: ubuntu-latest
+    name: Integration (${{ matrix.ansible }}+py${{ matrix.python }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # - ansible: stable-2.9
+          #   python: 3.5
+          # - ansible: stable-2.10
+          #   python: 3.5
+          - ansible: stable-2.11
+            python: 3.6
+          - ansible: stable-2.12
+            python: "3.10"
+          - ansible: stable-2.13
+            python: "3.10"
+          - ansible: devel
+            python: "3.10"
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          path: ansible_collections/kilip/homelab
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          # it is just required to run that once as "ansible-test integration" in the docker image
+          # will run on all python versions it supports.
+          python-version: '3.10'
+
+      - name: Install ansible-core (${{ matrix.ansible }})
+        run: pip install https://github.com/ansible/ansible/archive/${{ matrix.ansible }}.tar.gz --disable-pip-version-check
+
+      # Run the integration tests
+      - name: Run integration test
+        run: ansible-test integration -v --color --retry-on-error --continue-on-error --diff --python ${{ matrix.python }} --docker --coverage
+
+        # ansible-test support producing code coverage date
+      - name: Generate coverage report
+        run: ansible-test coverage xml -v --requirements --group-by command --group-by version
+
+      # See the reports at https://codecov.io/gh/ansible-collections/community.routeros
       - uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: false

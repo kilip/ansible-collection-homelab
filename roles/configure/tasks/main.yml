@@ -1,3 +1,24 @@
 ---
-- name: This fact should be gathered
+- name: Gather homelab facts
   kilip.homelab.facts:
+
+- name: Ensure config dir exists
+  ansible.builtin.file:
+    state: directory
+    path: "{{ homelab_config_dir }}"
+    mode: "0755"
+
+- name: Gather existing configuration
+  ansible.builtin.stat:
+    path: "{{ homelab_config_dir }}/homelab.yml"
+  register: scfg
+
+- name: Copy default config
+  when: not scfg.stat.exists
+  ansible.builtin.copy:
+    src: "homelab.yml"
+    dest: "{{ homelab_config_file }}"
+    mode: "0644"
+
+- name: Include homelab configuration
+  ansible.builtin.include_vars: "{{ homelab_config_file }}"

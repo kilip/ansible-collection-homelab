@@ -1,0 +1,32 @@
+---
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 600
+
+- name: install sops release
+  ansible.builtin.apt:
+    deb: https://github.com/mozilla/sops/releases/download/v{{ sops_version }}/sops_{{ sops_version }}_amd64.deb
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 600
+
+- name: install gnupg2
+  ansible.builtin.package:
+    name:
+      - gnupg
+    state: present
+
+- name: download sops test GPG key
+  get_url:
+    url: https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
+    dest: /tmp/sops_functional_tests_key.asc
+
+- name: import sops test GPG key
+  command: gpg --import /tmp/sops_functional_tests_key.asc
+  ignore_errors: yes
+
+- set_fact:
+    sops_installed: yes
