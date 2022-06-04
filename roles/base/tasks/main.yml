@@ -1,0 +1,10 @@
+---
+- name: Include debian tasks
+  ansible.builtin.include_tasks: debian/main.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Set timezone
+  community.general.timezone:
+    name: "{{ homelab_timezone }}"
+  when:
+    - homelab_timezone is defined

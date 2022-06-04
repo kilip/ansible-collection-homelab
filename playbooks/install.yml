@@ -1,6 +1,0 @@
----
-- hosts: all
-  tasks:
-    - name: Include configure role
-      ansible.builtin.include_role:
-        name: kilip.homelab.configure

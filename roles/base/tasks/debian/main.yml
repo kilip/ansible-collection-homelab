@@ -1,0 +1,37 @@
+---
+- name: Include vars for debian os family
+  ansible.builtin.include_vars: debian.yml
+
+- name: Include vars for kubernetes nodes
+  ansible.builtin.include_vars: debian-k8s.yml
+  when: "'kubernetes' in group_names"
+
+- name: Set packages for kubernetes nodes
+  ansible.builtin.set_fact:
+    debian_packages: "{{ debian_packages + debian_k8s_packages }}"
+  when: "'kubernetes' in group_names"
+
+- name: Upgrading debian packages
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 600
+
+- name: Install required packages for k8s node
+  ansible.builtin.package:
+    name: "{{ debian_k8s_packages }}"
+    state: present
+
+- name: Install RasPi specific packages
+  ansible.builtin.apt:
+    name:
+      - linux-modules-extra-raspi
+    install_recommends: false
+  notify: Restart node
+  when: "'raspi' in ansible_kernel"
+
+- name: Restart node if necessary
+  ansible.builtin.meta: flush_handlers
+
+- name: Configure unattended upgrades
+  ansible.builtin.include_tasks: unattended-upgrades.yml
+  when: "'community.docker.docker' != ansible_connection"

@@ -1,0 +1,9 @@
+---
+- name: Configure kernel
+  ansible.builtin.include_tasks: kernel.yml
+
+- name: Configure filesystem
+  ansible.builtin.include_tasks: filesystem.yml
+
+- name: Configure network
+  ansible.builtin.include_tasks: network.yml

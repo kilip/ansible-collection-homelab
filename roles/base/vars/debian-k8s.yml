@@ -1,0 +1,26 @@
+---
+debian_k8s_packages:
+  - apt-transport-https
+  - arptables
+  - ebtables
+  - ca-certificates
+  - curl
+  - ebtables
+  - gdisk
+  - hdparm
+  - htop
+  - iputils-ping
+  - ipvsadm
+  - lvm2
+  - nano
+  - net-tools
+  - nfs-common
+  - nvme-cli
+  - open-iscsi
+  - psmisc
+  - smartmontools
+  - socat
+  - software-properties-common
+  - unattended-upgrades
+  - unzip
+  - tzdata

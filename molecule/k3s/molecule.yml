@@ -1,0 +1,52 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: k3s-0
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
+    networks:
+      - name: k3snet
+  - name: k3s-1
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
+    networks:
+      - name: k3snet
+  - name: k3s-2
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
+    networks:
+      - name: k3snet
+
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      hosts: "sandbox/ansible/inventory/hosts"
+      host_vars: "sandbox/ansible/inventory/host_vars"
+      group_vars: "sandbox/ansible/inventory/group_vars"
+  env:
+    HOMELAB_PROJECT_DIR: "${PWD}/molecule/k3s/sandbox"
+    SOPS_AGE_PUBLIC_KEY: "age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a"
+    SOPS_AGE_KEY_FILE: "${PWD}/etc/age.txt"
+    SOPS_AGE_KEY: "AGE-SECRET-KEY-1UW0JQ4VA4PXNPDKPFHTJ932E5TVNCFMDNQKTUNCYGNUZ3VFD6E2QMQA3ZT"
+  config_options:
+    defaults:
+      vars_plugins_enabled: "host_group_vars,community.sops.sops"
+
+verifier:
+  name: ansible

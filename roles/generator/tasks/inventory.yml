@@ -21,16 +21,32 @@
     src: "inventory/host-vars.yml.j2"
     dest: "{{ homelab_inventory_dir }}/host_vars/{{ item.hostname }}.sops.yml"
     mode: "0644"
+    force: no
   loop_control:
     label: "{{ item.hostname }}"
   vars:
     host: "{{ item }}"
   with_items: "{{ homelab_hosts }}"
+  changed_when: false
+
+- name: Get list of hosts files
+  ansible.builtin.find:
+    paths: "{{ homelab_inventory_dir }}/host_vars"
+  register: fhosts
+
+- name: "Encrypt hostvars files"
+  ansible.builtin.command:
+    cmd: "sops -i -e {{ item.path }}"
+    chdir: "{{ homelab_project_dir }}"
+  with_items: "{{ fhosts.files }}"
+  changed_when: false
+  failed_when: false
 
 - name: Build group vars
   ansible.builtin.copy:
     src: "kubernetes/{{ item }}.yml"
     dest: "{{ homelab_inventory_dir }}/group_vars/{{ item }}/k3s.yml"
+    force: no
   loop:
     - kubernetes
     - master
