@@ -116,7 +116,6 @@ jobs:
       - name: Generate coverage report
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
 
-      # See the reports at https://codecov.io/gh/ansible_collections/ansible-collections/community.routeros
       - uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: false
@@ -130,6 +129,7 @@ jobs:
         scenario:
           - default
           - deploy-env
+          - k3s
         dist:
           - ubuntu-22.04
     steps:

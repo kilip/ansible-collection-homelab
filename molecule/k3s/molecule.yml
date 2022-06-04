@@ -8,6 +8,8 @@ platforms:
     image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
     pre_build_image: true
     privileged: true
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
@@ -17,6 +19,8 @@ platforms:
     image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
     pre_build_image: true
     privileged: true
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
@@ -26,6 +30,8 @@ platforms:
     image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
     pre_build_image: true
     privileged: true
+    capabilities:
+      - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
