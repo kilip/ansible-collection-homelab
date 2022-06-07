@@ -10,3 +10,5 @@ homelab_required_vars:
   - homelab_config_file
   - homelab_repository
   - homelab_hosts
+
+homelab_is_testing: false

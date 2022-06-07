@@ -1,5 +1,5 @@
 {
-  "ansible.ansibleLint.enabled": false,
+  "ansible.ansibleLint.enabled": true,
   "files.associations": {
     "**/playbooks/**/*.yml": "ansible",
     "**/roles/**/tasks/**/*.yml": "ansible",
@@ -8,8 +8,5 @@
     "**/molecule/**/verify.yml": "ansible",
     "**/molecule/**/cleanup.yml": "ansible"
   },
-  "yaml.schemas": {
-    "https://raw.githubusercontent.com/ansible/schemas/main/f/molecule.json": "file:///home/toni/project/ansible_collections/kilip/homelab/molecule/configure/molecule.yml"
-  },
-  "sops.configPath": "./etc/.sops.yaml"
+  "sops.configPath": "./etc/.sops.yaml",
 }

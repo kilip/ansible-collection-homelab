@@ -1,0 +1,23 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: node1
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    pre_build_image: true
+    privileged: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    groups:
+      - kubernetes
+
+provisioner:
+  name: ansible
+
+verifier:
+  name: ansible

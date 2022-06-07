@@ -1,2 +1,4 @@
 ---
-debian_packages: []
+debian_packages:
+  - kmod
+  - tzdata

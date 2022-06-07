@@ -1,6 +1,6 @@
 ---
-- name: Prepare k3s node
-  ansible.builtin.include_tasks: prepare/main.yml
+#- name: Prepare k3s node
+#  ansible.builtin.include_tasks: prepare/main.yml
 
 - name: Install k3s
   ansible.builtin.include_tasks: install.yml

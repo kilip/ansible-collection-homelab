@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  vars:
+    homelab_timezone: "Asia/Makassar"
+    homelab_is_testing: true
+  tasks:
+    - name: "Include homelab"
+      include_role:
+        name: "kilip.homelab.base"

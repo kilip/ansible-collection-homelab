@@ -2,6 +2,7 @@
 - name: Restart node
   ansible.builtin.reboot:
     msg: Restart node due to system changes
+  when: not homelab_is_testing
 
 - name: Restart unattended-upgrades
   ansible.builtin.service:
@@ -9,4 +10,4 @@
     daemon_reload: true
     enabled: true
     state: restarted
-  when: ansible_connection != "community.docker.docker"
+  when: not homelab_is_testing

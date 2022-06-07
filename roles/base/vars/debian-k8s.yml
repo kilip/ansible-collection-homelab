@@ -23,4 +23,3 @@ debian_k8s_packages:
   - software-properties-common
   - unattended-upgrades
   - unzip
-  - tzdata

@@ -13,12 +13,13 @@
 
 - name: Upgrading debian packages
   ansible.builtin.apt:
+    upgrade: full
     update_cache: yes
     cache_valid_time: 600
 
-- name: Install required packages for k8s node
+- name: Install required packages for homelab nodes
   ansible.builtin.package:
-    name: "{{ debian_k8s_packages }}"
+    name: "{{ debian_packages }}"
     state: present
 
 - name: Install RasPi specific packages
@@ -34,4 +35,3 @@
 
 - name: Configure unattended upgrades
   ansible.builtin.include_tasks: unattended-upgrades.yml
-  when: "'community.docker.docker' != ansible_connection"

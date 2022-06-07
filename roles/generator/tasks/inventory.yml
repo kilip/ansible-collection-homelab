@@ -1,4 +1,9 @@
 ---
+- name: Cleans exsisting host vars
+  ansible.builtin.file:
+    path: "{{ homelab_inventory_dir }}/host_vars"
+    state: absent
+
 - name: Ensure inventory dir exists
   ansible.builtin.file:
     path: "{{ homelab_inventory_dir }}/{{ item }}"
@@ -21,7 +26,6 @@
     src: "inventory/host-vars.yml.j2"
     dest: "{{ homelab_inventory_dir }}/host_vars/{{ item.hostname }}.sops.yml"
     mode: "0644"
-    force: no
   loop_control:
     label: "{{ item.hostname }}"
   vars:

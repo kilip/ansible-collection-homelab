@@ -8,3 +8,7 @@
     name: "{{ homelab_timezone }}"
   when:
     - homelab_timezone is defined
+
+- name: Include kubernetes node tasks
+  ansible.builtin.include_tasks: kubernetes/main.yml
+  when: "'kubernetes' in group_names"

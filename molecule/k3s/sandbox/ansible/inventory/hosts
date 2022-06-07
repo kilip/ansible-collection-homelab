@@ -1,14 +1,13 @@
-k3s-0
-k3s-1
-k3s-2
-
+node1
+node2
+node3
 
 [master]
-k3s-0
+node1
 
 [worker]
-k3s-1
-k3s-2
+node2
+node3
 
 [kubernetes:children]
 master
