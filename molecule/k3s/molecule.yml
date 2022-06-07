@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: node1
-    image: "kilip/molecule-${MOLECULE_DISTRO:-ubuntu-20.04}:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
@@ -15,7 +15,7 @@ platforms:
     networks:
       - name: k3snet
   - name: node2
-    image: "kilip/molecule-${MOLECULE_DISTRO:-ubuntu-20.04}:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
@@ -23,7 +23,7 @@ platforms:
     networks:
       - name: k3snet
   - name: node3
-    image: "kilip/molecule-${MOLECULE_DISTRO:-ubuntu-20.04}:latest"
+    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu2004}-ansible:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true

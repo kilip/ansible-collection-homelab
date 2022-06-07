@@ -1,8 +1,24 @@
 ---
 - hosts: kubernetes
+  become: true
   vars:
     k3s_state: installed
+    k3s_agent:
+      snapshotter: native
+    k3s_become: true
   collections:
     - kilip.homelab
   roles:
     - k3s
+  pre_tasks:
+    - name: Wait for systemd to complete initialization.  # noqa 303
+      command: systemctl is-system-running
+      register: systemctl_status
+      until: >
+        'running' in systemctl_status.stdout or
+        'degraded' in systemctl_status.stdout
+      retries: 30
+      delay: 5
+      when: ansible_service_mgr == 'systemd'
+      changed_when: false
+      failed_when: systemctl_status.rc > 1
