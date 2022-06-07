@@ -17,6 +17,8 @@ platforms:
     tmpfs:
       - /tmp
       - /run
+    capabilities:
+      - SYS_ADMIN
   - name: node2
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
     volumes:
@@ -28,6 +30,8 @@ platforms:
     tmpfs:
       - /tmp
       - /run
+    capabilities:
+      - SYS_ADMIN
   - name: node3
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
     volumes:
@@ -39,6 +43,9 @@ platforms:
     tmpfs:
       - /tmp
       - /run
+    capabilities:
+      - SYS_ADMIN
+
 provisioner:
   name: ansible
   options:

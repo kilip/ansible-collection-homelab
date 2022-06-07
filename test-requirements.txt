@@ -7,5 +7,6 @@ kubernetes
 pytest-testdox
 pytest
 ansible
+ansible-lint
 molecule
 molecule-docker
