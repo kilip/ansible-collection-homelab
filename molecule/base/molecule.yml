@@ -7,7 +7,7 @@ driver:
 
 platforms:
   - name: node1
-    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-22.04}:latest
+    image: kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest
     pre_build_image: true
     privileged: true
     volumes:
