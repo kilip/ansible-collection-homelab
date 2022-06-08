@@ -130,7 +130,8 @@ jobs:
           - default
           - deploy-env
           - base
-          - k3s
+          # TODO: enable k3s build on ci
+          # - k3s
         dist:
           - ubuntu-20.04
     steps:

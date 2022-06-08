@@ -10,41 +10,41 @@ platforms:
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
     privileged: true
     pre_build_image: true
     networks:
       - name: k3snet
     tmpfs:
-      - /tmp
       - /run
-    capabilities:
-      - SYS_ADMIN
+      - /tmp
+    command: "/lib/systemd/systemd"
   - name: node2
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
     privileged: true
     pre_build_image: true
     networks:
       - name: k3snet
     tmpfs:
-      - /tmp
       - /run
-    capabilities:
-      - SYS_ADMIN
+      - /tmp
+    command: "/lib/systemd/systemd"
   - name: node3
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /lib/modules:/lib/modules:ro
     privileged: true
     pre_build_image: true
     networks:
       - name: k3snet
     tmpfs:
-      - /tmp
       - /run
-    capabilities:
-      - SYS_ADMIN
+      - /tmp
+    command: "/lib/systemd/systemd"
 
 provisioner:
   name: ansible
@@ -60,6 +60,7 @@ provisioner:
     SOPS_AGE_PUBLIC_KEY: "age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a"
     SOPS_AGE_KEY_FILE: "${PWD}/etc/age.txt"
     SOPS_AGE_KEY: "AGE-SECRET-KEY-1UW0JQ4VA4PXNPDKPFHTJ932E5TVNCFMDNQKTUNCYGNUZ3VFD6E2QMQA3ZT"
+    K3S_DOWNLOAD_URL: "${K3S_DOWNLOAD_URL:-https://github.com/k3s-io/k3s}"
   config_options:
     defaults:
       vars_plugins_enabled: "host_group_vars,community.sops.sops"
