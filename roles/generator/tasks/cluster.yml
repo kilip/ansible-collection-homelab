@@ -23,6 +23,7 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "0644"
+  changed_when: false
   with_items: "{{ homelab_cluster_sops + homelab_cluster_files }}"
   loop_control:
     label: "{{ item.src | basename }}"
@@ -31,3 +32,6 @@
   ansible.builtin.command:
     cmd: "sops -i -e --config {{ homelab_sops_config_file }} {{ item.dest }}"
   with_items: "{{ homelab_cluster_sops }}"
+  changed_when: false
+  loop_control:
+    label: "{{ item.src | basename }}"
