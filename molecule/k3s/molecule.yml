@@ -8,6 +8,7 @@ driver:
 platforms:
   - name: node1
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
@@ -15,12 +16,9 @@ platforms:
     pre_build_image: true
     networks:
       - name: k3snet
-    tmpfs:
-      - /run
-      - /tmp
-    command: "/lib/systemd/systemd"
   - name: node2
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
@@ -28,12 +26,9 @@ platforms:
     pre_build_image: true
     networks:
       - name: k3snet
-    tmpfs:
-      - /run
-      - /tmp
-    command: "/lib/systemd/systemd"
   - name: node3
     image: "kilip/molecule-${MOLECULE_DIST:-ubuntu-20.04}:latest"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /lib/modules:/lib/modules:ro
@@ -41,10 +36,7 @@ platforms:
     pre_build_image: true
     networks:
       - name: k3snet
-    tmpfs:
-      - /run
-      - /tmp
-    command: "/lib/systemd/systemd"
+
 
 provisioner:
   name: ansible
