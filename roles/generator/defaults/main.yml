@@ -8,7 +8,45 @@ homelab_required_vars:
   - homelab_project_dir
   - homelab_config_dir
   - homelab_config_file
-  - homelab_repository
   - homelab_hosts
+  - homelab_multi_env
+  - homelab_git_repository
+  - homelab_git_branch
+  - homelab_cloudflare_domain
+  - homelab_cloudflare_apikey
+  - homelab_cloudflare_email
+  - homelab_metallb_lb_range
+  - homelab_metallb_k8s_gateway_address
+  - homelab_metallb_traefik_address
+  - homelab_age_public_key
+  - homelab_kube_vip_address
 
 homelab_is_testing: false
+
+homelab_cluster_config: "{{ homelab_deploy_dir + '/config' if homelab_multi_env else homelab_cluster_dir + '/base' }}"
+
+homelab_cluster_sops:
+  - src: "cluster/cert-manager-secret.sops.yaml"
+    dest: "{{ homelab_cluster_dir }}/core/cert-manager/secret.sops.yaml"
+  - src: "cluster/cloudflare-ddns-secret.sops.yaml"
+    dest: "{{ homelab_cluster_dir }}/apps/networking/cloudflare-ddns/secret.sops.yaml"
+  - src: "cluster/external-dns-secret.sops.yaml"
+    dest: "{{ homelab_cluster_dir }}/apps/networking/external-dns/secret.sops.yaml"
+  - src: "cluster/cluster-secrets.sops.yaml"
+    dest: "{{ homelab_cluster_config }}/cluster-secrets.sops.yaml"
+
+homelab_cluster_files:
+  - src: "cluster/cluster-settings.yaml"
+    dest: "{{ homelab_cluster_config }}/cluster-settings.yaml"
+  - src: "cluster/kube-vip-daemonset.yaml"
+    dest: "{{ homelab_cluster_dir }}/core/kube-system/kube-vip/daemon-set.yaml"
+  - src: "kube-vip.yml"
+    dest: "{{ homelab_inventory_dir }}/group_vars/kubernetes/kube-vip.yml"
+  - src: "flux/gotk-components.yaml"
+    dest: "{{ homelab_deploy_dir }}/gotk-components.yaml"
+  - src: "flux/gotk-patches.yaml"
+    dest: "{{ homelab_deploy_dir }}/gotk-patches.yaml"
+  - src: "flux/gotk-sync.yaml.j2"
+    dest: "{{ homelab_deploy_dir }}/gotk-sync.yaml"
+  - src: "flux/kustomization.yaml"
+    dest: "{{ homelab_deploy_dir }}/kustomization.yaml"

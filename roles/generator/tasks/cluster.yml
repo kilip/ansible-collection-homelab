@@ -1,0 +1,22 @@
+---
+- name: Ensure deploy dir exists
+  ansible.builtin.file:
+    path: "{{ homelab_deploy_dir }}"
+    state: "directory"
+    mode: "0775"
+
+- name: Copy base cluster files
+  ansible.builtin.copy:
+    src: "files/cluster"
+    dest: "{{ homelab_project_dir }}"
+    directory_mode: "0775"
+    mode: "0644"
+
+- name: Generate cluster templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+  with_items: "{{ homelab_cluster_sops + homelab_cluster_files }}"
+  loop_control:
+    label: "{{ item.src | basename }} "

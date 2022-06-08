@@ -10,12 +10,7 @@
     quiet: true
   loop_control:
     label: "{{ item }}"
-  loop:
-    - homelab_project_dir
-    - homelab_config_dir
-    - homelab_git_repository
-    - homelab_hosts
-    - inventory_hostname
+  loop: "{{ homelab_required_vars }}"
 
 - name: assert vars configured
   ansible.builtin.assert:
@@ -24,9 +19,4 @@
     quiet: true
   loop_control:
     label: "{{ item }}"
-  loop:
-    - homelab_project_dir
-    - homelab_config_dir
-    - homelab_git_repository
-    - homelab_hosts
-    - inventory_hostname
+  loop: "{{ homelab_required_vars }}"

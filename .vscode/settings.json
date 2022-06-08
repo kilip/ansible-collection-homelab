@@ -8,5 +8,11 @@
     "**/molecule/**/verify.yml": "ansible",
     "**/molecule/**/cleanup.yml": "ansible"
   },
+  "yaml.schemas": {
+    "Kubernetes": [
+      "**/cluster/**/*.yaml",
+      "**/flux/**/*.yaml",
+    ]
+  },
   "sops.configPath": "./etc/.sops.yaml",
 }

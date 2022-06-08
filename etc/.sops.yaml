@@ -3,3 +3,7 @@ creation_rules:
   - path_regex: .*\.sops\.ya?ml
     age: >-
       age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a
+  - path_regex: molecule/.*\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    age: >-
+      age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a

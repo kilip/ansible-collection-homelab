@@ -57,12 +57,16 @@ class ActionModule(ActionBase):
         if os.environ.get(ENV_DEPLOY) is not None:
             inventory_dir = inventory_dir + "/" + os.environ.get(ENV_DEPLOY)
 
+        cluster_dir = project_dir + "/cluster"
+        deploy_dir = cluster_dir + "/base/flux-system"
         if os.environ.get(ENV_DEPLOY) is not None:
             self.deploy = os.environ.get(ENV_DEPLOY)
+            deploy_dir = cluster_dir + "deploy/" + self.deploy
 
         self.config_dir = config_dir
         self.project_dir = project_dir
         self.config_file = config_dir + "/homelab.sops.yml"
+
 
         self._load_config(self.config_file)
         if self.deploy != "":
@@ -75,6 +79,8 @@ class ActionModule(ActionBase):
         self.facts['homelab_inventory_dir'] = inventory_dir
         self.facts['homelab_config_dir'] = config_dir
         self.facts['homelab_config_file'] = self.config_file
+        self.facts['homelab_cluster_dir'] = cluster_dir
+        self.facts['homelab_deploy_dir'] = deploy_dir
 
         if "homelab_hosts" in self.facts:
             self._configure_groups()
