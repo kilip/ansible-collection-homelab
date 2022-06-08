@@ -1,4 +1,16 @@
+homelab_multi_env: ENC[AES256_GCM,data:KeabZww=,iv:+/SfDU7cZ2SI5QpVy3Ks6IEO9t4Q9GH1ejD5w62ULIo=,tag:oA57DUtJKZU2heUZiWq30A==,type:bool]
 homelab_git_repository: ENC[AES256_GCM,data:wZRObDue/u+DgK5OhSCAxa/aBuJ82NMmPrY7lDhcn0s=,iv:HjpT5ddjojYU0Kc3PFKoF4nx3zEYjSFvzQOBnVMlJK4=,tag:RAt2f8YxvDqZXvBM0Luckw==,type:str]
+homelab_git_branch: ENC[AES256_GCM,data:tCCmFg==,iv:pfqY4r6d8BqnavWa4BglcO14fCYGmX5xb38CNy+pAlw=,tag:zkRzxJ8arEzv+8owZP/v3g==,type:str]
+homelab_github_webhook_secret: ENC[AES256_GCM,data:3sSPxWqKIPmwOlSNF6utuuq1mQ==,iv:VTWzKJchORqtXyH1lL/7hF4VSlbS9NsebNrTd8jPUTw=,tag:JQKZUQBvWGFzKUcbWussyQ==,type:str]
+homelab_cloudflare_domain: ENC[AES256_GCM,data:hJIUkSmYG2pZvgw=,iv:Ovj4oTnLDMoyNt7QluiJlSpbR5oyF0hjD97wZbnSHGU=,tag:B1al6pe6SgXiJUMK7wGzeA==,type:str]
+homelab_cloudflare_email: ENC[AES256_GCM,data:nYZMJ0QVsI8OOQXDjWHBbQ==,iv:bHJfvZh8mUhoSdGNE1WCK2b3alVmYSqQEMW7tsTKjOg=,tag:thri3VbfnxpwTH4XjavLCw==,type:str]
+homelab_cloudflare_apikey: ENC[AES256_GCM,data:nbA94w==,iv:TbdezIsGCHey4v1eA/LNyZVhUDUS5EuK4peylNaSEnQ=,tag:ZKwEqB0D/XYKF+4kc5qONg==,type:str]
+homelab_metallb_lb_range: ENC[AES256_GCM,data:Iwyuejf7ua51WDnQHQZhQRqZVBbhCB5iYw4h+Jg=,iv:8RybdXG2xDfUD6Evyi2EAcyHVFRbHbdvSjt1s/Ft9hU=,tag:FmqvINLlqSM3j3o5NJfzHw==,type:str]
+homelab_metallb_k8s_gateway_address: ENC[AES256_GCM,data:KzySboVhDNoUXrHLpxQ=,iv:pgWK31jEK8MszziNPqhGXIja2bwOW1FmVOKywJC2dY0=,tag:aYwSYIgNnSke9HYSgwnjiQ==,type:str]
+homelab_metallb_traefik_address: ENC[AES256_GCM,data:e11OZUCiwDrEL0D8Km0=,iv:B/6SbfwxLgf1K7KFHLzcNvcFFulVBo88QIgvj5KfuEE=,tag:fUlyHwzP2okGp3XZGH3Hag==,type:str]
+homelab_age_public_key: ENC[AES256_GCM,data:WK/FW7P7mjzjQh7sW0VSyazMUp6TwVO41ZnNkNXlNT3m8pi6A+7+EFPz,iv:ICl8ZFq9xVsoN5UuaWqaCbcmit8O9M2vLkr8sVohG8Q=,tag:K3tZmUYaK1/ZznyKOWNRNw==,type:str]
+homelab_kube_vip_address: ENC[AES256_GCM,data:acs2yUpx3rm/8gr+aRU=,iv:8n0p5cZtzqGnx1eGH0RcoSH5ejrm9/2YjJvuLVkVvGk=,tag:8f4qfBPVKSX4umQUulnSBQ==,type:str]
+homelab_git_secret_name: ""
 #ENC[AES256_GCM,data:n1CMJH77CyOB/OLbBLqfUE/7drMpAzMknSPZeG0=,iv:L7jQoQgqB81a/InV4UpTnrwz9I5SYaNHX3WgYwzb4U4=,tag:si2vEKG1z2eBjAt/YRZn5Q==,type:comment]
 homelab_hosts:
     - hostname: ENC[AES256_GCM,data:cwmic+8=,iv:AxcmvDlufBb75RHlhUfJVWf3q3WDTv9BTmIGf8ztua4=,tag:9MmHumNcKSfCaIf3Y3FlwA==,type:str]
@@ -31,8 +43,8 @@ sops:
             QUNhVCtUTEJ3ck53Nmk3TjB4MGNCWXMKorzsShjwgigSgphd1SjAFmyUIHFmVaMU
             KHTLe50rG3hovMsE4/K67bJUsIIOi4biUyOORIC3jNJ8lGpYTRXE1g==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2022-06-03T10:42:39Z"
-    mac: ENC[AES256_GCM,data:WiQK3e9f7DHW2TyVrdko9GGpfyVBrCf4xqyupnyQ/qs170o2flBMPxVmZKlxGD79unHmbpHSubl6f75AAOvL7X5x0RnCFGUwDQsC/1GSv8v4vK90De68FmdzZp6NeFHkARpCJqxkKowN883oq0Fl0aM0GXeySJddcRyu9u6BfB8=,iv:B2ld9U2zsyEXmzk2AIOpINeGnieE4u2c0+eQIllrFTQ=,tag:5AEhZoMhxvf/93DyhNkd7w==,type:str]
+    lastmodified: "2022-06-08T12:17:35Z"
+    mac: ENC[AES256_GCM,data:36CCUcaFcccQkg6OgjdWaCU3+95X8WZb/lTLQfuXVMyYj2yGWVY/z5i6DQX4Sm3hKARzqMSdF+Yv+FE/T/HHJiaa92XPZbKZQJsfw9kLmmyxbWkYf23xZKs2K3BDZ9wOyFxRljA3m0LTU5jyCLn0LsPL1ZpglUv7UR+bP66Dtyc=,iv:up8ztA4EfShwjDjj48Zb4SQuCxbix15sneC95e/TGAQ=,tag:HU9bUInoGWninAiSWrODaQ==,type:str]
     pgp: []
     unencrypted_suffix: _unencrypted
     version: 3.7.3

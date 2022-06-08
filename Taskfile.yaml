@@ -2,7 +2,7 @@
 version: "3"
 
 vars:
-  SCENARIO: '{{default "configure" .SCENARIO}}'
+  SCENARIO: '{{default "default" .SCENARIO}}'
 
 env:
   PYTHON_VERSION:

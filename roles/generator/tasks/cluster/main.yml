@@ -1,0 +1,9 @@
+---
+- name: Generate base cluster files
+  ansible.builtin.include_tasks: base.yml
+
+- name: Include flux webhook
+  ansible.builtin.include_tasks: cluster/git-webhook.yml
+  when:
+    - homelab_github_webhook_secret is defined
+    - homelab_github_webhook_secret | length > 0
