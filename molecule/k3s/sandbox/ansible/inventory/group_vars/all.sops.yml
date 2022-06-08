@@ -1,0 +1,22 @@
+homelab_timezone: ENC[AES256_GCM,data:sbdV3pXxvx1BboyuPQ==,iv:ZgT4Fcf+o15tK0jbINLhk2KHYOwlZJmihXUhc3EkJOg=,tag:woeMJ/S34tcyaIe1Flqclw==,type:str]
+molecule_is_test: ENC[AES256_GCM,data:ln9enQ==,iv:BdfZxdEh2HV03MoCjGJxfhYndy1e8QJv+yJ/7r1Bv3o=,tag:RKSMrGplkXMuzAaY6UwrCQ==,type:bool]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3OXhncFJpdzhGYnc4dWZT
+            ek11V004Q0Uwa3JpRXNDTnBwTjBjSlJaNzI4ClZkSGswM3hQYjhJVnA1dkZWTnQv
+            SGI1RTU5V0xNQVpoY3JTZFd3T1QwUjQKLS0tIDNqYXpIMndCOXgrU1VRaTlEQkMr
+            QUNhVCtUTEJ3ck53Nmk3TjB4MGNCWXMKorzsShjwgigSgphd1SjAFmyUIHFmVaMU
+            KHTLe50rG3hovMsE4/K67bJUsIIOi4biUyOORIC3jNJ8lGpYTRXE1g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-06-03T17:06:09Z"
+    mac: ENC[AES256_GCM,data:3ybWoxDne+y14qzpw/Cywq93GA+kvAuLuy8kJ22iyQUI9htuFVReh6/u3BM4fibjd3BkxxEZ/AvscbfamI5ld217H07Dp4Mx/rSVXIH5FLyrMZyVkRqBDCNOzbu57rsBL25eWibs0yytwPQAUOQH8q3HbOGYHaSfEjGlMCW5PDg=,iv:PxMODCi3enCUgNknVWX8b8Da0IfUuqx+wwPCx9LaS3o=,tag:huSxu1KAxVW0yTUNdn0XXQ==,type:str]
+    pgp: []
+    unencrypted_suffix: _unencrypted
+    version: 3.7.3

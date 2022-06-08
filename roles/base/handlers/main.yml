@@ -1,0 +1,13 @@
+---
+- name: Restart node
+  ansible.builtin.reboot:
+    msg: Restart node due to system changes
+  when: not homelab_is_testing
+
+- name: Restart unattended-upgrades
+  ansible.builtin.service:
+    name: unattended-upgrades.service
+    daemon_reload: true
+    enabled: true
+    state: restarted
+  when: not homelab_is_testing

@@ -1,0 +1,17 @@
+---
+- hosts: kubernetes
+  become: true
+  vars:
+    molecule_is_test: true
+    homelab_is_testing: true
+    k3s_agent:
+      snapshotter: native
+    k3s_install_hard_links: true
+    k3s_github_url: "{{ lookup('env', 'K3S_DOWNLOAD_URL') }}"
+  collections:
+    - kilip.homelab
+  roles:
+    - base
+    - k3s
+  pre_tasks:
+    - debug: var=k3s_github_url

@@ -1,0 +1,14 @@
+node1
+node2
+node3
+
+[master]
+node1
+
+[worker]
+node2
+node3
+
+[kubernetes:children]
+master
+worker

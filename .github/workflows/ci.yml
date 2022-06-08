@@ -9,8 +9,8 @@ on: # yamllint disable-line rule:truthy
     branches:
       - main
   # Run CI once per day (at 05:15 UTC)
-  schedule:
-    - cron: '15 5 * * *'
+  #schedule:
+  #  - cron: '15 5 * * *'
 
 defaults:
   run:
@@ -29,12 +29,12 @@ jobs:
         ansible:
           # It's important that Sanity is tested against all stable-X.Y branches
           # Testing against `devel` may fail as new tests are added.
-          - stable-2.9
-          - stable-2.10
-          - stable-2.11
-          - stable-2.12
+          #- stable-2.9
+          #- stable-2.10
+          #- stable-2.11
+          #- stable-2.12
           - stable-2.13
-          - devel
+          #- devel
     runs-on: ubuntu-latest
     steps:
 
@@ -78,12 +78,12 @@ jobs:
       fail-fast: false
       matrix:
         ansible:
-          - stable-2.9
-          - stable-2.10
-          - stable-2.11
-          - stable-2.12
+          #- stable-2.9
+          #- stable-2.10
+          #- stable-2.11
+          #- stable-2.12
           - stable-2.13
-          - devel
+          #- devel
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -116,22 +116,24 @@ jobs:
       - name: Generate coverage report
         run: ansible-test coverage xml -v --requirements --group-by command --group-by version
 
-      # See the reports at https://codecov.io/gh/ansible_collections/ansible-collections/community.routeros
       - uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: false
 
   integration:
     runs-on: ubuntu-latest
-    name: Molecule (${{ matrix.scenario }}-${{ matrix.dist }})
+    name: "Molecule (${{ matrix.scenario }}:${{ matrix.dist }})"
     strategy:
       fail-fast: false
       matrix:
         scenario:
           - default
           - deploy-env
+          - base
+          # TODO: enable k3s build on ci
+          # - k3s
         dist:
-          - ubuntu-22.04
+          - ubuntu-20.04
     steps:
       - name: Check out code
         uses: actions/checkout@v3

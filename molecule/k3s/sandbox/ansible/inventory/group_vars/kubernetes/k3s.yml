@@ -4,7 +4,7 @@
 # ...see https://github.com/PyratLabs/ansible-role-k3s
 #
 
-kube_vip_address: "{{ hostvars[homelab_master_hostname]['ansible_default_ipv4']['address'] }}"
+kube_vip_address: "{{ hostvars['node1']['ansible_default_ipv4']['address'] }}"
 
 # (string) Use a specific version of k3s
 # renovate: datasource=github-releases depName=k3s-io/k3s

@@ -7,8 +7,6 @@
     path: "{{ homelab_config_file }}"
   register: scfg
 
-- debug: var=homelab_deploy
-
 - name: Verify homelab configuration
   ansible.builtin.include_tasks: verify/config.yml
   when: scfg.stat.exists

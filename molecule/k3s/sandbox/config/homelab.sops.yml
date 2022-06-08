@@ -1,0 +1,27 @@
+homelab_git_repository: ENC[AES256_GCM,data:wZRObDue/u+DgK5OhSCAxa/aBuJ82NMmPrY7lDhcn0s=,iv:HjpT5ddjojYU0Kc3PFKoF4nx3zEYjSFvzQOBnVMlJK4=,tag:RAt2f8YxvDqZXvBM0Luckw==,type:str]
+#ENC[AES256_GCM,data:n1CMJH77CyOB/OLbBLqfUE/7drMpAzMknSPZeG0=,iv:L7jQoQgqB81a/InV4UpTnrwz9I5SYaNHX3WgYwzb4U4=,tag:si2vEKG1z2eBjAt/YRZn5Q==,type:comment]
+homelab_hosts:
+    - hostname: ENC[AES256_GCM,data:7/LXSzA=,iv:zf2HB0SI6mOBm7I5GVC8KXxoX1pb81kgopyneKayBOQ=,tag:HQ0O4+MOJyY5inIgoJ9DNw==,type:str]
+      groups:
+        - ENC[AES256_GCM,data:GVUxIzOwfCFghw==,iv:JKHCykfjPabquCwDKCEULKj9KyochP2zvlf0eQ5ZriQ=,tag:7EBgzhxHznJILlugG0IDKw==,type:str]
+      control_node: ENC[AES256_GCM,data:qOXOVA==,iv:i48DWiGZz2iXVl2mp/8Q+P+M8cc3kLaZMc1EwBLW98A=,tag:Cg70d8kTgH7qxJSyXvjwIA==,type:bool]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age16kqn75nkj66h0twcyf5tgzjlhr3wlvlaej0q8xwdkk4ttt0cuqgsev633a
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA3OXhncFJpdzhGYnc4dWZT
+            ek11V004Q0Uwa3JpRXNDTnBwTjBjSlJaNzI4ClZkSGswM3hQYjhJVnA1dkZWTnQv
+            SGI1RTU5V0xNQVpoY3JTZFd3T1QwUjQKLS0tIDNqYXpIMndCOXgrU1VRaTlEQkMr
+            QUNhVCtUTEJ3ck53Nmk3TjB4MGNCWXMKorzsShjwgigSgphd1SjAFmyUIHFmVaMU
+            KHTLe50rG3hovMsE4/K67bJUsIIOi4biUyOORIC3jNJ8lGpYTRXE1g==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2022-06-07T07:33:39Z"
+    mac: ENC[AES256_GCM,data:lPAFYxFZwnx3IOjDCGSZJ7KRFrmJSwMVO+jsaIb3EVRQTpbm6rDLuCY1VNmTCDVM24MdThVqOEnu1akE2qMh5IN0BzbPEEGaJWAy7bIc966TJnXRVA2bGXTMbB8S8SOHHflxRdQMEpmZu3d5mLDOkrnzPfutZR8jANabh8pbUMw=,iv:Fzq7YZT8Ov7o+SHfdyU1ADrnGNz23YrIkVbC8kcdoXQ=,tag:lNYDR7UTPxZPT0wAs7hqcw==,type:str]
+    pgp: []
+    unencrypted_suffix: _unencrypted
+    version: 3.7.3

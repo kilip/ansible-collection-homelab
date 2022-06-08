@@ -1,0 +1,25 @@
+---
+- name: Ensure configuration updated
+  hosts: localhost
+  tasks:
+    - name: Start configuring homelab
+      ansible.builtin.include_role:
+        name: "kilip.homelab.generator"
+
+- name: Base install for all nodes
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Include base role
+      ansible.builtin.include_role:
+        name: "kilip.homelab.base"
+
+- name: Install k3s on kubernetes nodes
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Include k3s role
+      ansible.builtin.include_role:
+        name: "kilip.homelab.k3s"
