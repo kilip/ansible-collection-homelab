@@ -51,4 +51,8 @@ homelab_cluster_files:
   - src: "flux/kustomization.yaml"
     dest: "{{ homelab_deploy_dir }}/kustomization.yaml"
 
+homelab_webhooks_templates:
+  - src: "apps/webhook-secret.sops.yaml"
+    dest: "{{ homelab_cluster_dir }}/apps/flux-system/webhooks/github/secret.sops.yaml"
+
 homelab_sops_config_file: "{{ homelab_project_dir }}/.sops.yaml"

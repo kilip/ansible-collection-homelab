@@ -17,8 +17,14 @@
     dest: "{{ homelab_config_file }}"
     mode: "0644"
 
+- name: Ensure sops config file exists
+  ansible.builtin.template:
+    src: "sops-config.yml.j2"
+    dest: "{{ homelab_sops_config_file }}"
+    mode: "0644"
+
 - name: Encrypt homelab config file
   ansible.builtin.command:
-    cmd: "sops -i -e {{ homelab_config_file }}"
+    cmd: "sops -i -e --config {{ homelab_sops_config_file }} {{ homelab_config_file }}"
     chdir: "{{ homelab_project_dir }}"
   when: not scfg.stat.exists
