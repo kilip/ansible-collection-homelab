@@ -23,15 +23,16 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "0644"
-  changed_when: false
-  with_items: "{{ homelab_cluster_sops + homelab_cluster_files }}"
+  with_items: "{{ homelab_cluster_files }}"
   loop_control:
     label: "{{ item.src | basename }}"
 
-- name: Encrypt cluster sops files
-  ansible.builtin.command:
-    cmd: "sops -i -e --config {{ homelab_sops_config_file }} {{ item.dest }}"
+- name: Generate encrypted sops file
+  community.sops.sops_encrypt:
+    path: "{{ item.dest }}"
+    content_yaml: "{{ lookup('template', item.src) | from_yaml }}"
+    config_path: "{{ homelab_sops_config_file }}"
+    mode: "0644"
   with_items: "{{ homelab_cluster_sops }}"
-  changed_when: false
   loop_control:
     label: "{{ item.src | basename }}"

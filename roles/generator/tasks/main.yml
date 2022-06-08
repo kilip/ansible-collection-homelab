@@ -22,5 +22,5 @@
   when: scfg.stat.exists
 
 - name: Build cluster files
-  ansible.builtin.include_tasks: cluster.yml
+  ansible.builtin.include_tasks: cluster/main.yml
   when: scfg.stat.exists

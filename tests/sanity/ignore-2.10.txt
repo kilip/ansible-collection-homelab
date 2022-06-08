@@ -7,6 +7,6 @@ roles/generator/templates/cluster/cloudflare-ddns-secret.sops.yaml yamllint:unpa
 roles/generator/templates/cluster/cluster-secrets.sops.yaml yamllint:unparsable-with-libyaml
 roles/generator/templates/cluster/cluster-settings.yaml yamllint:unparsable-with-libyaml
 roles/generator/templates/cluster/external-dns-secret.sops.yaml yamllint:unparsable-with-libyaml
-roles/generator/templates/cluster/flux-system/webhooks/github/secret.sops.yaml yamllint:unparsable-with-libyaml
 roles/generator/templates/flux/gotk-components.yaml yamllint:unparsable-with-libyaml
 roles/generator/templates/flux/gotk-patches.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/apps/webhook-secret.sops.yaml yamllint:unparsable-with-libyaml

@@ -15,7 +15,7 @@ homelab_multi_env: false
 # ignored - this feature will be disabled
 # generated - this will generate a token and print it in the logs
 # Set this to any other string and it will be used for the secret
-homelab_flux_github_webhook_secret: ""
+homelab_github_webhook_secret: ""
 #
 # Choose one of your cloudflare domains
 # e.g. k8s-at-home.com

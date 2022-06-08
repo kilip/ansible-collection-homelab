@@ -1,2 +1,12 @@
 ---
-- name: Configures flux git webhook
+- name: Copy flux webhook
+  ansible.builtin.copy:
+    src: apps/flux-system
+    dest: "{{ homelab_cluster_dir }}/apps"
+
+- name: Copy github webhook secret sops
+  community.sops.sops_encrypt:
+    path: "{{ homelab_cluster_dir }}/apps/flux-system/webhooks/github/secret.sops.yaml"
+    content_yaml: "{{ lookup('template', 'apps/webhook-secret.sops.yaml') | from_yaml }}"
+    config_path: "{{ homelab_sops_config_file }}"
+    mode: "0644"
