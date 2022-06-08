@@ -1,0 +1,12 @@
+roles/generator/files/cluster/apps/networking/traefik/middlewares/cloudflare-only.yaml yamllint:unparsable-with-libyaml
+roles/generator/files/cluster/apps/networking/traefik/middlewares/internal-only.yaml yamllint:unparsable-with-libyaml
+roles/generator/files/cluster/core/kube-system/kube-vip/rbac.yaml yamllint:unparsable-with-libyaml
+roles/generator/files/cluster/crds/traefik/crds.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/cert-manager-secret.sops.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/cloudflare-ddns-secret.sops.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/cluster-secrets.sops.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/cluster-settings.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/external-dns-secret.sops.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/cluster/flux-system/webhooks/github/secret.sops.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/flux/gotk-components.yaml yamllint:unparsable-with-libyaml
+roles/generator/templates/flux/gotk-patches.yaml yamllint:unparsable-with-libyaml
