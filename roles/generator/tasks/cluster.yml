@@ -5,6 +5,12 @@
     state: "directory"
     mode: "0775"
 
+- name: Ensure deploy dir for env exists
+  ansible.builtin.file:
+    path: "{{ homelab_deploy_dir }}/config"
+    state: directory
+    mode: "0775"
+
 - name: Copy base cluster files
   ansible.builtin.copy:
     src: "files/cluster"
@@ -19,4 +25,9 @@
     mode: "0644"
   with_items: "{{ homelab_cluster_sops + homelab_cluster_files }}"
   loop_control:
-    label: "{{ item.src | basename }} "
+    label: "{{ item.src | basename }}"
+
+- name: Encrypt cluster sops files
+  ansible.builtin.command:
+    cmd: "sops -i -e --config {{ homelab_sops_config_file }} {{ item.dest }}"
+  with_items: "{{ homelab_cluster_sops }}"

@@ -23,6 +23,7 @@ class ActionModule(ActionBase):
         self.project_dir = ""
         self.config_file = ""
         self.deploy = ""
+        self.multi_env = False
 
     def _load_config(self, file):
         if not exists(file):
@@ -61,12 +62,13 @@ class ActionModule(ActionBase):
         deploy_dir = cluster_dir + "/base/flux-system"
         if os.environ.get(ENV_DEPLOY) is not None:
             self.deploy = os.environ.get(ENV_DEPLOY)
-            deploy_dir = cluster_dir + "deploy/" + self.deploy
+
+        if self.deploy is not None:
+            deploy_dir = cluster_dir + "/deploy/" + self.deploy
 
         self.config_dir = config_dir
         self.project_dir = project_dir
         self.config_file = config_dir + "/homelab.sops.yml"
-
 
         self._load_config(self.config_file)
         if self.deploy != "":
@@ -98,6 +100,8 @@ class ActionModule(ActionBase):
         for key, value in task_vars.items():
             if key == 'homelab_deploy':
                 self.deploy = value
+            if key == 'homelab_multi_env':
+                self.multi_env = value
 
         self._setup_path()
 

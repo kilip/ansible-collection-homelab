@@ -50,3 +50,5 @@ homelab_cluster_files:
     dest: "{{ homelab_deploy_dir }}/gotk-sync.yaml"
   - src: "flux/kustomization.yaml"
     dest: "{{ homelab_deploy_dir }}/kustomization.yaml"
+
+homelab_sops_config_file: "{{ homelab_project_dir }}/.sops.yaml"

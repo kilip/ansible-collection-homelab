@@ -17,12 +17,6 @@
     dest: "{{ homelab_config_file }}"
     mode: "0644"
 
-- name: Build sops config
-  ansible.builtin.template:
-    src: "sops-config.yml.j2"
-    dest: "{{ homelab_project_dir }}/.sops.yaml"
-    mode: "0644"
-
 - name: Encrypt homelab config file
   ansible.builtin.command:
     cmd: "sops -i -e {{ homelab_config_file }}"

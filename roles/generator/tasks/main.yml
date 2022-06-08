@@ -2,6 +2,12 @@
 - name: Gather homelab facts
   kilip.homelab.facts:
 
+- name: Ensure sops config file exists
+  ansible.builtin.template:
+    src: "sops-config.yml.j2"
+    dest: "{{ homelab_sops_config_file }}"
+    mode: "0644"
+
 - name: Gather existing configuration
   ansible.builtin.stat:
     path: "{{ homelab_config_file }}"
