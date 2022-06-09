@@ -11,7 +11,7 @@ license:
 tags:
   - homelab
   - kubernetes
-  - kubernetes-cluster
+  - cluster
 dependencies:
   community.general: ">=5.0.0"
   community.sops: ">=1.2.1"
