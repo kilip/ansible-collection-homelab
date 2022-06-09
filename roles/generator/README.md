@@ -1,0 +1,4 @@
+Generator
+====
+
+Generates homelab configuration
